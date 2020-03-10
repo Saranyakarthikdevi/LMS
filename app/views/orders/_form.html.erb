@@ -1,0 +1,39 @@
+<%= form_for(order) do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %>
+      prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, size: 40 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :department %>
+    <%= f.text_area :department, rows: 3, cols: 40 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, size: 40 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :plan_type %>
+    <%= f.select :plan_type, Order.plan_types.keys,
+                  prompt: 'Select plan' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'done' %>
+  </div>
+<% end %>
